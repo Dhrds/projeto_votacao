@@ -1,5 +1,7 @@
 import os
 from pathlib import Path
+
+import pymysql
 import info
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -92,10 +94,13 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+
+
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
+pymysql.install_as_MySQLdb()
 
 
 
