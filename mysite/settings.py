@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -74,13 +75,21 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ["PGDATABASE"],
-        'USER': os.environ["PGUSER"],
-        'PASSWORD': os.environ["PGPASSWORD"],
-        'HOST': os.environ["PGHOST"],
-        'PORT': os.environ["PGPORT"],
+    # 'default': {
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': os.environ["PGDATABASE"],
+        # 'USER': os.environ["PGUSER"],
+        # 'PASSWORD': os.environ["PGPASSWORD"],
+        # 'HOST': os.environ["PGHOST"],
+        # 'PORT': os.environ["PGPORT"],
+    # }
+        'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'u751391022_douglas',
+        'USER': 'u751391022_douglas',
+        'PASSWORD': 'Admin123456',
+        'HOST': 'http://projetospark.com.br/',  
+        'PORT': '3306',
     }
 }
 AUTHENTICATION_BACKENDS = [
