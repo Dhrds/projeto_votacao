@@ -4,6 +4,7 @@ from pathlib import Path
 import pymysql
 import info
 
+pymysql.install_as_MySQLdb()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -87,11 +88,11 @@ DATABASES = {
     # }
         'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'u751391022_douglas',
-        'USER': 'u751391022_douglas',
-        'PASSWORD': 'Admin123456',
-        'HOST': 'http://projetospark.com.br/',  
-        'PORT': '3306',
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': 'U64HzXAeJ3EsPe5bfaWl',
+        'HOST': 'containers-us-west-131.railway.app',  
+        'PORT': 8016,
     }
 }
 
@@ -100,7 +101,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
-pymysql.install_as_MySQLdb()
+
 
 
 
