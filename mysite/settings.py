@@ -158,5 +158,3 @@ EMAIL_HOST_USER = info.EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = info.EMAIL_HOST_PASSWORD
 
 
-git config --global user.email "dhrds1996@gmail.com"
-git config --global user.name "Douglas"

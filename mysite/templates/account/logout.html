@@ -5,6 +5,12 @@
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
 
 {% block content %}
+{% if user.is_authenticated%}
+                <p>Welcome, {{user.username}}</p>
+                <a href="http://127.0.0.1:8000/accounts/logout/">Logout</a>
+                {%else%}
+                <p>Please <a href="http://127.0.0.1:8000/accounts/login/">Login</a></p>
+                {%endif%}
 <h1>{% trans "Sign Out" %}</h1>
 
 <p>{% trans 'Are you sure you want to sign out?' %}</p>
