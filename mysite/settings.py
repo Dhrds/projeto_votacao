@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    ]
+]
 
 SITE_ID = 1
 
@@ -58,7 +58,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [[os.path.join(BASE_DIR,'templates')]],
+        'DIRS': [[os.path.join(BASE_DIR, 'templates')]],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,31 +78,30 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': os.environ["PGDATABASE"],
-        # 'USER': os.environ["PGUSER"],
-        # 'PASSWORD': os.environ["PGPASSWORD"],
-        # 'HOST': os.environ["PGHOST"],
-        # 'PORT': os.environ["PGPORT"],
-    # }
-        'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'railway',
-        'USER': 'root',
-        'PASSWORD': 'U64HzXAeJ3EsPe5bfaWl',
-        'HOST': 'containers-us-west-131.railway.app',  
-        'PORT': 8016,
-    }
-}
+    'default': {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'NAME': os.environ["MYSQLDATABASE"],
+    'USER': os.environ["MYSQLUSER"],
+    'PASSWORD': os.environ["MYSQLPASSWORD"],
+    'HOST': os.environ["MYSQLHOST"],
+    'PORT': os.environ["MYSQLPORT"],
+    }}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'railway',
+#         'USER': 'root',
+#         'PASSWORD': 'U64HzXAeJ3EsPe5bfaWl',
+#         'HOST': 'containers-us-west-131.railway.app',
+#         'PORT': 8016,
+#     }
+# }
 
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
-
-
 
 
 # Password validation
@@ -149,10 +148,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = info.EMAIL_PORT
-EMAIL_USER_TLS	= True
+EMAIL_USER_TLS = True
 EMAIL_HOST_USER = info.EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = info.EMAIL_HOST_PASSWORD
