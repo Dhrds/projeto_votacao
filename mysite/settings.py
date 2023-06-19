@@ -103,6 +103,8 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+LOGIN_REDIRECT_URL = '/'
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -154,3 +156,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = info.EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = info.EMAIL_HOST_PASSWORD
+
+
+git config --global user.email "dhrds1996@gmail.com"
+git config --global user.name "Douglas"
