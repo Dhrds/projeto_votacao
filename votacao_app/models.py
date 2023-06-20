@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Email(models.Model):
+class Email_teste(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.PROTECT)
     data_criacao = models.DateTimeField(auto_now_add=True, editable=False)
     data_edicao = models.DateTimeField(auto_now=True, editable=False)
