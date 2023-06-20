@@ -11,16 +11,17 @@
 <body>
     <div class="title">
         <h2>Digite o código enviado em seu email</h2>
-        <form>
+        <form method="post"action="{% url 'verificar_senha' %}">
           <div class="user-box">
+            {% csrf_token %}
 
-            <input type="text" name="" required=""maxlength="1">
+            <input type="text" name="cod1" required=""maxlength="1">
         
-            <input type="text" name="" required=""maxlength="1">
+            <input type="text" name="cod2" required=""maxlength="1">
           
-            <input type="text" name="" required=""maxlength="1">
+            <input type="text" name="cod3" required=""maxlength="1">
              
-            <input type="text" name="" required=""maxlength="1">
+            <input type="text" name="cod4" required=""maxlength="1">
              
           <div class="user-box">
             
@@ -29,7 +30,8 @@
             <span></span>
             <span></span>
             <span></span>
-            Verificar
+            <button type="submit">Verificar</button>
+            
           </a>
         </form>
       </div>
