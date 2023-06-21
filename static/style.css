@@ -97,7 +97,7 @@ h1{
   display: block;
 }
 
-.login-box a span:nth-child(1) {
+.submit-button span:nth-child(1) {
   top: 0;
   left: -100%;
   width: 100%;
@@ -115,7 +115,7 @@ h1{
   }
 }
 
-.login-box a span:nth-child(2) {
+.submit-button span:nth-child(2) {
   top: -100%;
   right: 0;
   width: 2px;
