@@ -39,11 +39,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'votacao_app',
 
-    
-    'django_otp',
-    'django_otp.plugins.otp_totp',
-    'django_otp.plugins.otp_hotp',
-    'django_otp.plugins.otp_static',
 ]
 
 SITE_ID = 1
