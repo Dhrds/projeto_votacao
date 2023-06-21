@@ -13,9 +13,9 @@
 
     <div class="login-box">
   <h2>Verificação de Senha</h2>
-  <form>
+  <form method="post" action="{% url 'home' %}">
     <div class="user-box">
-      <input type="text" name="" required="">
+      <input type="text" name="email" required="">
       <label>Gmail</label>
     </div>
     <div class="user-box">
