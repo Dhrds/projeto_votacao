@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from votacao_app.forms import Codigo
 import random 
 
-@login_required
+#@login_required
 def home(request):
     email = request.POST.get('email') 
     print(email)
