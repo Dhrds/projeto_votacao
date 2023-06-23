@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     
-    'django_otp.middleware.OTPMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -80,15 +80,18 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-    'ENGINE': 'django.db.backends.mysql',
-    'NAME': 'railway',
-    'USER': 'root',
-    'PASSWORD': 'U64HzXAeJ3EsPe5bfaWl',
-    'HOST': 'containers-us-west-131.railway.app',
-    'PORT': '8016',
-    }}
+
+# DATABASES = {
+#     'default': {
+#     'ENGINE': 'django.db.backends.mysql',
+#     'NAME': 'railway',
+#     'USER': 'root',
+#     'PASSWORD': 'U64HzXAeJ3EsPe5bfaWl',
+#     'HOST': 'containers-us-west-131.railway.app',
+#     'PORT': '8016',
+#     }}
+
+# mysql
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
@@ -99,6 +102,13 @@ DATABASES = {
 #         'PORT': 8016,
 #     }
 # }
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 
 AUTHENTICATION_BACKENDS = [
