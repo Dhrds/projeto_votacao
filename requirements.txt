@@ -6,4 +6,4 @@ sqlparse==0.4.2
 whitenoise==6.2.0
 mysqlclient==2.1.1
 django-otp==1.2.2
-dbbackup==1.9.0
+dbbackup==4.0.2
