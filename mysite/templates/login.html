@@ -1,36 +1,72 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <title>Sistema de Votação</title>
-    <h1>Preencha com seu Email para receber o codigo de validação</h1>
-</head>
-<body>
 
-    <div class="login-box">
-  <h2>Verificação de Senha</h2>
-  <h3>{{msg}}</h3>
-  <form method="POST" action="{% url 'home' %}">
-    {% csrf_token %}
-    <div class="user-box">
-      <input type="text" name="email" required="">
-      <label>Email</label>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Sistema de Votação</title>
+  <h1>Preencha com seu Email para receber o codigo de validação</h1>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+  {% if messages %}
+    {% for m in messages %}
+        <div class="alert alert-warning" role="alert">
+          {{ m }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+  <div class="login-box">
+    <h2>Verificação de Senha</h2>
+    <h3>{{msg}}</h3>
+    <form method="POST" action="{% url 'home' %}">
+      {% csrf_token %}
+      <div class="user-box">
+        <input type="text" name="email" required="">
+        <label>Email</label>
+      </div>
+      <div class="user-box">
+        <a href="{% url 'verificar' %}">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Enviar
+        </a>
+        <button class="submit-button" type="submit">Enviar</button>
+    </form>
+  </div>
+  <style>
+    .modal-backdrop {
+        z-index: -1;
+    }</style>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" style="width: 100%;">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
     </div>
-    <div class="user-box">
-    <a href="{% url 'verificar' %}" >
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      Enviar
-    </a>
-    <button class="submit-button" type="submit">Enviar</button>
-  </form>
-</div>
-    
+  </div>
 </body>
+
 </html>

@@ -1,14 +1,22 @@
 html {
   height: 100%;
 }
+
 body {
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
   font-family: sans-serif;
   background: linear-gradient(#23014b, #8835a8);
 }
+.modal-backdrop {
+  z-index: -1;
+}
+.modal-dialog {
+  /* width: 600px; */
+  margin: 30px auto;
+}
 
-h1{
+h1 {
   color: #fff;
   font-size: 25px;
 }
@@ -23,7 +31,7 @@ h1{
   transform: translate(-50%, -50%);
   background: rgba(108, 21, 134, 0.452);
   box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
   border-radius: 10px;
 }
 
@@ -31,7 +39,7 @@ h1{
   margin: 0 0 30px;
   padding: 0;
   color: #f79400da;
-  text-align: center;                                               
+  text-align: center;
 }
 
 .login-box .user-box {
@@ -49,9 +57,10 @@ h1{
   outline: none;
   background: transparent;
 }
+
 .login-box .user-box label {
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
   padding: 10px 0;
   font-size: 16px;
@@ -60,8 +69,8 @@ h1{
   transition: .5s;
 }
 
-.login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label {
+.login-box .user-box input:focus~label,
+.login-box .user-box input:valid~label {
   top: -20px;
   left: 0;
   color: #c47601e5;
@@ -87,9 +96,9 @@ h1{
   color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 5px #ffb412,
-              0 0 25px #ffc219,
-              0 0 50px #fab115,
-              0 0 100px #f79400da;
+    0 0 25px #ffc219,
+    0 0 50px #fab115,
+    0 0 100px #f79400da;
 }
 
 .login-box a span {
@@ -110,7 +119,9 @@ h1{
   0% {
     left: -100%;
   }
-  50%,100% {
+
+  50%,
+  100% {
     left: 100%;
   }
 }
@@ -129,7 +140,9 @@ h1{
   0% {
     top: -100%;
   }
-  50%,100% {
+
+  50%,
+  100% {
     top: 100%;
   }
 }
@@ -148,7 +161,9 @@ h1{
   0% {
     right: -100%;
   }
-  50%,100% {
+
+  50%,
+  100% {
     right: 100%;
   }
 }
@@ -167,12 +182,22 @@ h1{
   0% {
     bottom: -100%;
   }
-  50%,100% {
+
+  50%,
+  100% {
     bottom: 100%;
   }
 }
+
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 100%;
+    margin: 30px auto;
+  }
+}
+
 @media screen and (max-width: 1080px) {
-  h1{
+  h1 {
     font-size: 15px;
   }
 }

@@ -1,8 +1,8 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
-from votacao_app.forms import Codigo
-from django.template import Template
+from django.contrib import messages
+from .models import Validacao ,EmailConfirmacao
 import random
 cod = 'a'
 
@@ -11,25 +11,30 @@ cod = 'a'
 
 def home(request):
     email = request.POST.get('email')
-    msg = ''
     print(email)
-    if email in ['asd@asd.com', 'asdf@asdf.com']:
+    emails = EmailConfirmacao.objects.values_list('emails')
+    x=[]
+    for mail in emails:
+        x.append(mail[0])
+    print(x)
+    if email in x:
         print(123)
         num = random.randint(1000, 9999)
         num = str(num)
         global cod
         cod = num
         print(cod)
-        # send_mail('assunto',num,'dhrds1996@gmail.com',[email,])
+        send_mail('assunto',num,'votacaoproz@gmail.com',[email,])
         email = None
         return redirect(verificar)
     elif email == None:
         email = None
+        msg = x
         return render(request, 'login.html', {'msg': msg})
     else:
         email = None
-        msg = 'Email invalido'
-        return render(request, 'login.html', {'msg': msg})
+        messages.info(request, 'Usuário não autorizado')
+        return render(request, 'login.html')
 
 
 def verificar(request):

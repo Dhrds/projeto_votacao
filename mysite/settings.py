@@ -17,7 +17,7 @@ SECRET_KEY = 'django-insecure-rc^*w^w&6g9_(uvx#6s*bnt!w)l0rdi%!l7mv#y%uc&x%wo5pk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True 
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["votacaoproz.up.railway.app"]
 
 # FORM SUBMISSION
 # Comment out the following line and place your railway URL, and your production URL in the array.
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'votacao_app',
+    
+    'dbbackup',
 
 ]
 
@@ -53,7 +55,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     
-    'django_otp.middleware.OTPMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -73,6 +74,9 @@ TEMPLATES = [
         },
     },
 ]
+
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage' #o que salvar
+DBBACKUP_STORAGE_OPTIONS = {'location': 'backups/'} # onde salvar
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
