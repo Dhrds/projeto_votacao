@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'votacao_app',
     
-    'dbbackup',
+
 
 ]
 
