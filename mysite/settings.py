@@ -17,7 +17,7 @@ SECRET_KEY = 'django-insecure-rc^*w^w&6g9_(uvx#6s*bnt!w)l0rdi%!l7mv#y%uc&x%wo5pk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True 
 
-ALLOWED_HOSTS = ["https://votacaoproz.up.railway.app"]
+ALLOWED_HOSTS = ["https://votacaoproz.up.railway.app",]
 
 # FORM SUBMISSION
 
