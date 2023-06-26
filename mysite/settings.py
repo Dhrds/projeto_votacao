@@ -78,6 +78,8 @@ TEMPLATES = [
 
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage' #o que salvar
 DBBACKUP_STORAGE_OPTIONS = {'location': 'backups/'} # onde salvar
+# pip install django-dbbackup
+#python manage.py dbbackup  
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
@@ -158,7 +160,8 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
