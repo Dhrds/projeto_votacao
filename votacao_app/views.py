@@ -11,53 +11,51 @@ import random
 
 # @login_required
 def home(request):
+    cookies = request.COOKIES
     email = request.POST.get('email')
-    user = User.objects.filter(username ='atual')
-    user.email = email
-    print(99,user.email)
+    reponse = render(request, 'verificar_senha.html')
+    reponse.set_cookie('email',email)
+    print(cookies['email'])
     emails = EmailConfirmacao.objects.values_list('emails')
     x=[]
     for mail in emails:
         x.append(mail[0])
     msg = x
-    if user.email in x:
+    if email in x:
         num = random.randint(1000, 9999)
         num = str(num)
         cod = Validacao.objects.get(email=email)
-        cod.codido = num       
+        cod.codido = num  
+        cod.save()   
+        print(cod.email,cod.codido)          
+        send_mail('assunto',num,'votacaoproz@gmail.com',[email,])
         
-        #send_mail('assunto',num,'votacaoproz@gmail.com',[email,])
-        print(cod.codido,8)
-        print(cod.codido)
-        #return redirect('verificar')
-        return render(request, 'verificar_senha.html')
+        reponse = render(request, 'verificar_senha.html')
+        reponse.set_cookie('email',email)
+        return reponse  
+        
     else:
         print('aqui',email)
-        return render(request, 'login.html', {'msg': 'teste'})  
+        reponse = render(request, 'login.html', {'msg': 'teste'})
+        reponse.set_cookie('email',email)
+        return reponse  
 
 
 def verificar(request):
+    cookies = request.COOKIES
+    email =cookies['email']
     emails = EmailConfirmacao.objects.values_list('emails')
     x=[]    
     for mail in emails:
         x.append(mail[0])
-    print(request.user,88)
-    user = User.objects.filter(username = 'atual')
-    print(x)
-    if 1 in x:
-        num = random.randint(1000, 9999)
-        num = str(num)
+    if email in x:
         cod = Validacao.objects.get(email=email)
-        cod.codido = num       
-        
-        #send_mail('assunto',num,'votacaoproz@gmail.com',[email,])
         cod1 = request.POST.get('cod1', 'None')
         cod2 = request.POST.get('cod2', 'None')
         cod3 = request.POST.get('cod3', 'None')
         cod4 = request.POST.get('cod4', 'None')
         cods = cod1 + cod2 + cod3 + cod4
-        print(cod.codido,8)
-        print(cods, cod.codido)
+        print(cods,cod.email, cod.codido)
         if cod.codido == cods:
             # usuario = authenticate(request, username=username, password=password)
 
@@ -66,5 +64,7 @@ def verificar(request):
             print(2)
             return render(request,'verificar_senha.html')
     else:
-        print('aqui')
-        return render(request, 'verificar_senha.html')   
+        reponse = render(request, 'login.html', {'msg': 'teste'})
+        reponse.set_cookie('email',cookies['email'])
+        return reponse  
+
