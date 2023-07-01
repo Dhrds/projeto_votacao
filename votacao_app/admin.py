@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import EmailConfirmacao ,Validacao
+from .models import Aluno,Grupo
 
 # Register your models here.
-admin.site.register(EmailConfirmacao)
-admin.site.register(Validacao)
+admin.site.register(Aluno)
+admin.site.register(Grupo)
