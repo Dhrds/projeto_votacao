@@ -1,9 +1,9 @@
-from django.shortcuts import render, HttpResponse ,redirect
+from django.shortcuts import render, HttpResponse ,redirect 
 from django.core.mail import send_mail
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import Aluno,Grupo
+from .models import Aluno,Grupo,Votacao
 from django.contrib.auth import authenticate, login
+from django.http import HttpResponseNotFound
 import random
 
 
@@ -75,20 +75,29 @@ def verificar(request):
     
 
 def votacao(request):
-    user = request.user
-    grupos = Grupo.objects.values_list('nome_grupo')
-    aluno = Aluno.objects.get(nome = user.username)
-    grupos_tratados = []
-    for i in grupos:
-        grupos_tratados.append(i[0])
-    voto = request.POST.get('grupo')
-    grupos_tratados.remove('teste')
-    grupos_tratados.remove(aluno.grupo.nome_grupo)
-    print(grupos_tratados,grupos,aluno.grupo.nome_grupo)
-    if user.is_authenticated:
-        
-        return render(request, 'tela_votacao.html',{'grupos':grupos_tratados})
-    else:
-        return redirect(verificar,{'messages': 'teste'})
+    # try:
+        user = request.user
+        grupos = Grupo.objects.values_list('nome_grupo')
+        aluno = Aluno.objects.get(nome = user.username)
+        grupos_tratados = []
+        for i in grupos:
+            grupos_tratados.append(i[0])
+        voto = request.POST.get('grupo')
+        grupos_tratados.remove(aluno.grupo.nome_grupo)
+        print(voto,Votacao.objects.filter(aluno=user.username).exists())
+        if user.is_authenticated:
+            if voto :  
+                if not Votacao.objects.filter(aluno=user.username).exists() :            
+                    votacao =Votacao.objects.create(aluno = user.username,grupo = voto )
+                    voto = False
+                else:
+                    return render(request, 'confirmar-voto.html',{'user':user})
+            if Votacao.objects.filter(aluno=user.username).exists() :
+                return render(request, 'confirmar-voto.html',{'user':user})
+            return render(request, 'tela_votacao.html',{'grupos':grupos_tratados})
+        else:
+            return redirect(verificar,{'messages': 'teste'})
+    # except:
+    #     return HttpResponseNotFound('ola')
         
     

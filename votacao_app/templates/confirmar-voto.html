@@ -14,12 +14,12 @@
 <body>
     <div class="title">
          
-        <h2>Parabéns   , pelo seu voto</h2>
+        <h2>Parabéns  {{ user.username }} , pelo seu voto</h2>
         <form>
              
           <div class="user-box">
             
-            <a button type="button" onclick="handleClick()">Sair</button>
+            <a href="{% url 'home' %}">Sair</button>
             <span></span>
             <span></span>
             <span></span>
