@@ -19,6 +19,7 @@ def home(request):
             aluno.codigo = num
             aluno.save()
             send_mail('assunto', num, 'votacaoproz@gmail.com', [email, ])
+            print(num)
             reponse = render(request, 'verificar_senha.html')
             reponse.set_cookie('email', email)
             return reponse
