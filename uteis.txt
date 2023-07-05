@@ -1,0 +1,39 @@
+PASSO A PASSO 
+
+CRIAR UM AMBIENTE VIRTUAL
+python -m venv NOME_DO_AMBIENTE
+
+ATIVAR 
+NOME_DO_AMBIENTE\Scripts\activate
+se der erro pra ativar no windons execute esse comando no powerShell 'Set-Execution Unrestricted -Force'
+
+INSTALE AS Dependências
+pip install -r requirements.txt
+OU
+python.exe -m pip install --upgrade pip
+pip install django
+pip install django-allauth
+pip install python-decouple
+
+
+Sincronize a base de dados
+python .\manage.py migrate 
+
+Crie um usuário (Administrador do sistema)
+python .\manage.py createsuperuser 
+
+
+urls
+http://127.0.0.1:8000/
+http://127.0.0.1:8000/accounts/login/
+http://127.0.0.1:8000/accounts/logout/
+http://127.0.0.1:8000/accounts/signup/
+http://127.0.0.1:8000/accounts/password/reset/
+http://127.0.0.1:8000/accounts/password/set/
+http://127.0.0.1:8000/accounts/email/
+http://127.0.0.1:8000/accounts/confirm-email/
+http://127.0.0.1:8000/accounts/password/reset/done/
+http://127.0.0.1:8000/accounts/password/reset/key/done/
+
+
+pip freeze > requirements.txt

@@ -1,3 +1,3 @@
-EMAIL_HOST_PASSWORD='lkdwoxocrjnpucrd'
-EMAIL_HOST_USER = 'dhrds1996@gmail.com'
+EMAIL_HOST_PASSWORD='jtuyhdzolttsgywg'
+EMAIL_HOST_USER = 'votacaoproz@gmail.com'
 EMAIL_PORT = 587
