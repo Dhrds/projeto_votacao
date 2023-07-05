@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+
+  <script src="{% static 'js/login-email.js' %}"></script>
+  <title>Sistema de Votação</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100&family=Koulen&family=Oxanium:wght@300&family=Rammetto+One&family=Righteous&family=Unica+One&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300&family=Righteous&family=Unica+One&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  {% if messages %}
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <span class="popup-close" onclick="closePopup()"></span>
+      <h1>Aviso</h1>
+      <p>E-mail não cadastrado para receber</p>
+      <p>um código de verificação</p>
+      <p>ㅤ</p>
+      <button class="popup-button" onclick="closePopup()">OK</button>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener("load", openPopup);
+  </script>
+  {% endif %}
+
+  <div class="login-box">
+    <h2>Verificação de Senha</h2>
+    <form method="POST" id="my_form" action="{% url 'home' %}">
+      {% csrf_token %}
+      <div class="user-box">
+        <input type="email" class="login-email" autocomplete="off" autofocus name="email" required>
+        <label>Email</label>
+      </div>
+      <div class="user-box">
+        <input type="submit" value="ENVIAR" class="button-submit">
+        <a onclick="document.getElementById('my_form').submit();">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
+        </input>
+      </div>
+
+      <!-- <button class="submit-button animacao" type="submit">Enviar</button> -->
+    </form>
+  </div>
+  <style>
+    .modal-backdrop {
+      z-index: -1;
+    }
+  </style>
+</body>
+
+</html>
