@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Aluno,Grupo,Votacao 
+from .models import Aluno,Grupo ,Votacao
 
 # Register your models here.
 admin.site.register(Aluno)

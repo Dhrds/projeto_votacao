@@ -20,9 +20,9 @@
   {% if messages %}
   <div id="popup" class="popup">
     <div class="popup-content">
-      <span class="popup-close" onclick="closePopup()">&times;</span>
+      <span class="popup-close" onclick="closePopup()"></span>
       <h1>Aviso</h1>
-      <p>Preencha com seu e-mail para receber</p>
+      <p>E-mail não cadastrado para receber</p>
       <p>um código de verificação</p>
       <p>ㅤ</p>
       <button class="popup-button" onclick="closePopup()">OK</button>
@@ -39,11 +39,11 @@
     <form method="POST" id="my_form" action="{% url 'home' %}">
       {% csrf_token %}
       <div class="user-box">
-        <input type="email" class="login-email" autocomplete="on" autofocus name="email" required>
+        <input type="email" class="login-email" autocomplete="off" autofocus name="email" required>
         <label>Email</label>
       </div>
       <div class="user-box">
-        <input type="submit" value="Sanfona" class="button-submit">
+        <input type="submit" value="ENVIAR" class="button-submit">
         <a onclick="document.getElementById('my_form').submit();">
           <span></span>
           <span></span>
