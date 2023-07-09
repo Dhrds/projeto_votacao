@@ -42,8 +42,9 @@ def verificar(request):
             return render(request, 'verificar_senha.html')
     else:
         reponse = render(request, 'login.html', {'msg': 'teste'})
-        reponse.set_cookie('email', cookies['email'])
         return reponse
+
+
 
 
 def votacao(request):
@@ -83,7 +84,15 @@ def check(request):
         num = str(num)
         aluno.codigo = num
         aluno.save()
-        send_mail('assunto', num, 'votacaoproz@gmail.com', [email, ])
+        send_mail('Codigo de Verificação',f'''ola seja bem vindo 
+seu voto é extremamente importante para a validação do nosso melhor projeto!
+aqui esta seu codigo de verificação!
+
+
+{num}
+
+
+desde já agradecemos! ''' , 'votacaoproz@gmail.com', [email, ])
         print(num)
         reponse = render(request, 'verificar_senha.html')
         request.session['email']=email
