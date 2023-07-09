@@ -84,9 +84,9 @@ def check(request):
         num = str(num)
         aluno.codigo = num
         aluno.save()
-        send_mail('Codigo de Verificação',f'''ola seja bem vindo 
-seu voto é extremamente importante para a validação do nosso melhor projeto!
-aqui esta seu codigo de verificação!
+        send_mail('Codigo de Verificação',f'''olá, seja bem vindo! 
+Seu voto é extremamente importante para a validação do nosso melhor projeto!
+Aqui está seu codigo de verificação!
 
 
 {num}
