@@ -37,14 +37,14 @@
 
   <div class="login-box">
     <h2>Verificação de Senha</h2>
-    <form method="POST" id="my_form" action="{% url 'check' %}">
+    <form method="POST" id="my_form" action="{% url 'check' %}" onsubmit="aguarde()">
       {% csrf_token %}
       <div class="user-box">
         <input type="email" class="login-email" autocomplete="off" autofocus name="email" required>
         <label>Email</label>
       </div>
       <div class="user-box">
-        <input type="submit" value="ENVIAR" onclick="aguarde()" class="button-submit">
+        <input type="submit" value="ENVIAR"  class="button-submit">
         <a onclick="document.getElementById('my_form').submit();">
           <span></span>
           <span></span>
