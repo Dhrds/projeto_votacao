@@ -6,13 +6,15 @@ from django.contrib.auth import authenticate, login
 from django.http import Http404
 import random
 
+
 def home(request):
-    msg = request.session.get('messages',None)
+    msg = request.session.get('messages', None)
     reponse = render(request, 'login.html', {'messages': msg})
     return reponse
 
+
 def verificar(request):
-    email = request.session.get('email',None)
+    email = request.session.get('email', None)
     emails = Aluno.objects.values_list('email')
     x = []
     for mail in emails:
@@ -45,8 +47,6 @@ def verificar(request):
         return reponse
 
 
-
-
 def votacao(request):
     # try:
     user = request.user
@@ -73,7 +73,8 @@ def votacao(request):
         return redirect(verificar, {'messages': 'teste'})
     # except:
     #     return HttpResponseNotFound('ola')
-    
+
+
 def check(request):
     if not request.POST:
         raise Http404
@@ -84,23 +85,61 @@ def check(request):
         num = str(num)
         aluno.codigo = num
         aluno.save()
-        send_mail('Codigo de Verificação',f'''olá, seja bem vindo! 
-Seu voto é extremamente importante para a validação do nosso melhor projeto!
-Aqui está seu codigo de verificação!
+        html = f'''
+                <html>
+                    <body>
+                        <div style="box-sizing:border-box;width:600px;display:block;background-color:#fff;font-family:Verdana,'Helvetica Neue',HelveticaNeue,Helvetica,Arial,sans-serif;padding:40px;border-radius:2px;border:solid 1px #efefef;text-align:center;margin-top:1rem"
+        id="m_-8812820040621664389__body__">
+        <div style="font-family:Verdana,'Helvetica Neue',HelveticaNeue,Helvetica,Arial,sans-serif;margin:0 0 30px 0">Oi,
+            {aluno.nome}</div>
+        <div style="font-family:Verdana,'Helvetica Neue',HelveticaNeue,Helvetica,Arial,sans-serif;margin:0 0 30px 0">
+            <h1
+                style="text-align:center;font-size:20px;color:#323232;font-family:Verdana,'Helvetica Neue',HelveticaNeue,Helvetica,Arial,sans-serif;margin:0;line-height:24px">
+                Seu código para autenticação</h1>
+        </div>
+        <div style="font-family:Verdana,'Helvetica Neue',HelveticaNeue,Helvetica,Arial,sans-serif;margin:0 0 30px 0">
+            <p
+                style="text-align:center;margin:0;padding:0;color:#323232;line-height:22px;font-family:Verdana,'Helvetica Neue',HelveticaNeue,Helvetica,Arial,sans-serif">
+                Recebemos uma solicitação de acesso à sua conta. Utilize o código abaixo para confirmar:</p>
+        </div>
+        <div style="font-family:Verdana,'Helvetica Neue',HelveticaNeue,Helvetica,Arial,sans-serif;margin:0 0 30px 0">
+            <center>
+                <div
+                    style="background:#f9f9f9;padding-top:9px;padding-bottom:7px;padding-left:39px;padding-right:36px;width:163px;height:41px">
+                    <p
+                        style="text-align:center;margin:0;padding:0;color:#323232;line-height:25px;font-family:Verdana,'Helvetica Neue',HelveticaNeue,Helvetica,Arial,sans-serif;font-size:18px;font-weight:bold;letter-spacing:4.5px;padding-top:9px">
+                        {num}</p>
+                </div>
+            </center>
+        </div>
+        <div style="font-family:Verdana,'Helvetica Neue',HelveticaNeue,Helvetica,Arial,sans-serif;margin:0 0 30px 0">
+            <p
+                style="text-align:center;margin:0;padding:0;color:#999999;line-height:16px;font-family:Verdana,'Helvetica Neue',HelveticaNeue,Helvetica,Arial,sans-serif;font-size:12px">
+                Código válido para acesso.</p>
+        </div>
+        <div style="font-family:Verdana,'Helvetica Neue',HelveticaNeue,Helvetica,Arial,sans-serif;margin:0 0 30px 0">
+            <hr style="border:0;height:1px;background-color:#e1e1e1;width:429px">
+        </div>
+
+    </div>
+                    </body>
+                </html>
+                '''
+        send_mail('Código de Verificação', '',
+                  'votacaoproz@gmail.com', [email, ], html_message=html)
+#         send_mail('Código de Verificação', f'''Valide o código no sistema appVotação!
+
+# {num}
 
 
-{num}
-
-
-desde já agradecemos! ''' , 'votacaoproz@gmail.com', [email, ])
+# ''', 'votacaoproz@gmail.com', [email, ])
         print(num)
         reponse = render(request, 'verificar_senha.html')
-        request.session['email']=email
-        return redirect ('verificar')
+        request.session['email'] = email
+        return redirect('verificar')
     except Aluno.DoesNotExist:
         aluno = None
-        request.session['messages']='email-nao-cadastrado'
+        request.session['messages'] = 'email-nao-cadastrado'
         reponse = render(request, 'login.html')
 
-        return redirect ('home')
-    
+        return redirect('home')
