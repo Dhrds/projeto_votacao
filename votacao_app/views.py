@@ -5,9 +5,11 @@ from .models import Aluno, Grupo, Votacao
 from django.contrib.auth import authenticate, login
 from django.http import Http404
 import random
+import time
 
 def envia_email(email):
     aluno = Aluno.objects.get(email=email)
+    print(aluno)
     num = random.randint(1000, 9999)
     num = str(num)
     aluno.codigo = num
@@ -53,7 +55,8 @@ def envia_email(email):
             </html>
             '''
     send_mail('Código de Verificação', '',
-                'votacaoproz@gmail.com', [email, ], html_message=html)
+              'votacaoproz@gmail.com', 
+              [email, ],html_message=html)
 
 
 def home(request):
@@ -61,6 +64,19 @@ def home(request):
     reponse = render(request, 'login.html', {'messages': msg})
     return reponse
 
+
+def check(request):
+    if not request.POST:
+        raise Http404
+    email = request.POST.get('email')
+    try:
+        envia_email(email)
+        request.session['email'] = email
+        return redirect('verificar')
+    except Aluno.DoesNotExist:
+        aluno = None
+        request.session['messages'] = 'email-nao-cadastrado'
+        return redirect('home')
 
 def verificar(request):
     email = request.session.get('email', None)
@@ -80,7 +96,6 @@ def verificar(request):
                 print(user.is_authenticated)
                 return redirect('votacao')
             except:
-                print(465)
                 user = User.objects.create_user(
                     cod.nome, cod.email, cod.codigo)
                 login(request, user)
@@ -93,7 +108,7 @@ def verificar(request):
 
 
 def votacao(request):
-    # try:
+
     user = request.user
     grupos = Grupo.objects.values_list('nome_grupo')
     aluno = Aluno.objects.get(nome=user.username)
@@ -116,28 +131,5 @@ def votacao(request):
         return render(request, 'tela_votacao.html', {'grupos': grupos_tratados})
     else:
         return redirect(verificar, {'messages': 'teste'})
-    # except:
-    #     return HttpResponseNotFound('ola')
 
 
-def check(request):
-    if not request.POST:
-        raise Http404
-    email = request.POST.get('email')
-    try:
-        aluno = Aluno.objects.get(email=email)
-        num = random.randint(1000, 9999)
-        num = str(num)
-        aluno.codigo = num
-        aluno.save()
-        envia_email(aluno.email)
-        print(num)
-        reponse = render(request, 'verificar_senha.html')
-        request.session['email'] = email
-        return redirect('verificar')
-    except Aluno.DoesNotExist:
-        aluno = None
-        request.session['messages'] = 'email-nao-cadastrado'
-        reponse = render(request, 'login.html')
-
-        return redirect('home')
