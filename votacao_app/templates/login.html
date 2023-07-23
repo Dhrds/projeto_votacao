@@ -37,7 +37,7 @@
 
   <div class="login-box">
     <h2>Verificação de Senha</h2>
-    <form method="POST" id="my_form" action="{% url 'check' %}" onsubmit="aguarde()">
+    <form method="POST" id="my_form" action="{% url 'check'  %}" onsubmit="aguarde()">
       {% csrf_token %}
       <div class="user-box">
         <input type="email" class="login-email" autocomplete="off" autofocus name="email" required>

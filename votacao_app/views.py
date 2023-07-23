@@ -1,20 +1,19 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from .models import Aluno, Grupo, Votacao
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import  login
 from django.http import Http404
-import random
-import time
+import random 
+from .uteis import send_html_mail
 
-def envia_email(email):
-    aluno = Aluno.objects.get(email=email)
-    print(aluno)
+def html(email1):
+    aluno = Aluno.objects.get(email=email1)
     num = random.randint(1000, 9999)
     num = str(num)
     aluno.codigo = num
     aluno.save()
-    html = f'''
+    return f'''
             <html>
                 <body>
                     <div style="box-sizing:border-box;width:600px;display:block;background-color:#fff;font-family:Verdana,'Helvetica Neue',HelveticaNeue,Helvetica,Arial,sans-serif;padding:40px;border-radius:2px;border:solid 1px #efefef;text-align:center;margin-top:1rem"
@@ -54,9 +53,8 @@ def envia_email(email):
                 </body>
             </html>
             '''
-    send_mail('Código de Verificação', '',
-              'votacaoproz@gmail.com', 
-              [email, ],html_message=html)
+    # send_mail('Código de Verificação', '',
+    #           'votacaoproz@gmail.com',[email, ],html_message=html)
 
 
 def home(request):
@@ -70,11 +68,10 @@ def check(request):
         raise Http404
     email = request.POST.get('email')
     try:
-        envia_email(email)
+        send_html_mail('teste',html(email),['dhrds1996@gmail.com'],['noreply@thehobbymania.com'])        
         request.session['email'] = email
         return redirect('verificar')
     except Aluno.DoesNotExist:
-        aluno = None
         request.session['messages'] = 'email-nao-cadastrado'
         return redirect('home')
 
@@ -99,7 +96,7 @@ def verificar(request):
                 user = User.objects.create_user(
                     cod.nome, cod.email, cod.codigo)
                 login(request, user)
-            return redirect(request, votacao)
+            return redirect(votacao)
         else:
             return render(request, 'verificar_senha.html')
     else:

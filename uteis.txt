@@ -4,7 +4,7 @@ CRIAR UM AMBIENTE VIRTUAL
 python -m venv NOME_DO_AMBIENTE
 
 ATIVAR 
-NOME_DO_AMBIENTE\Scripts\activate
+venv\Scripts\activate
 se der erro pra ativar no windons execute esse comando no powerShell 'Set-Execution Unrestricted -Force'
 
 INSTALE AS Dependências

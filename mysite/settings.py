@@ -11,7 +11,7 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 # Comment out the following line and place your railway URL, and your production URL in the array.
-CSRF_TRUSTED_ORIGINS = ["https://votacaoproz.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ["https://votacaoproz.up.railway.app","https://127.0.0.1"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'votacao_app',
+    'debug_toolbar',
 
 
 ]
@@ -30,6 +31,7 @@ SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -38,6 +40,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
+]
+
+INTERNAL_IPS = [
+  "127.0.0.1",
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -68,15 +74,23 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'u751391022_votacao',
+#         'USER': 'u751391022_votacao',
+#         'PASSWORD': 'o^P4fX2wigk',
+#         'HOST': 'projetospark.com.br',
+#         'PORT': '3306',
+#     }}
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'u751391022_votacao',
-        'USER': 'u751391022_votacao',
-        'PASSWORD': 'o^P4fX2wigk',
-        'HOST': 'projetospark.com.br',
-        'PORT': '3306',
-    }}
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
+
 
 # AUTHENTICATION_BACKENDS = [
 #     'django.contrib.auth.backends.ModelBackend',
@@ -113,7 +127,7 @@ LANGUAGE_CODE = "pt-br"
 
 TIME_ZONE = "America/Sao_Paulo"
 
-USE_I18N = True
+USE_I18N = False
 
 USE_TZ = True
 
