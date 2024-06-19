@@ -53,14 +53,11 @@ def html(email1):
                 </body>
             </html>
             '''
-    # send_mail('Código de Verificação', '',
-    #           'votacaoproz@gmail.com',[email, ],html_message=html)
 
 
 def home(request):
     msg = request.session.get('messages', None)
-    reponse = render(request, 'login.html', {'messages': msg})
-    return reponse
+    return render(request, 'login.html', {'messages': msg})
 
 
 def check(request):
