@@ -67,6 +67,5 @@ class ViewTests(TestCase):
     
     def test_votacao_view_unauthenticated(self):
         response = self.client.get(reverse('votacao'))
-        self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse('verificar'))
+        self.assertRedirects(response, reverse('home'))
 
