@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from .models import Aluno, Grupo, Votacao
-from django.contrib.auth import  login
+from django.contrib.auth import login
 from django.http import Http404
-import random 
+import random
 from .uteis import send_html_mail
+
 
 def html(email1):
     aluno = Aluno.objects.get(email=email1)
@@ -52,7 +52,7 @@ def html(email1):
 </div>
                 </body>
             </html>
-            '''
+            ''' # noqa
 
 
 def home(request):
@@ -65,12 +65,13 @@ def check(request):
         raise Http404
     email = request.POST.get('email')
     try:
-        send_html_mail('teste',html(email),['dhrds1996@gmail.com'],['noreply@thehobbymania.com'])        
+        send_html_mail('teste', html(email), ['dhrds1996@gmail.com'], ['noreply@thehobbymania.com'])
         request.session['email'] = email
         return redirect('verificar')
     except Aluno.DoesNotExist:
         request.session['messages'] = 'email-nao-cadastrado'
         return redirect('home')
+
 
 def verificar(request):
     email = request.session.get('email', None)
@@ -126,5 +127,3 @@ def votacao(request):
         return render(request, 'tela_votacao.html', {'grupos': grupos_tratados})
     else:
         return redirect('home')
-
-

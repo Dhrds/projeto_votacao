@@ -11,7 +11,7 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 # Comment out the following line and place your railway URL, and your production URL in the array.
-CSRF_TRUSTED_ORIGINS = ["https://votacaoproz.up.railway.app","https://127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = ["https://votacaoproz.up.railway.app", "https://127.0.0.1"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
