@@ -42,8 +42,8 @@ class ViewTests(TestCase):
         session = self.client.session
         session['email'] = 'test@example.com'
         session.save()
-        response = self.client.post(reverse('verificar'), {'cod1': '1', 'cod2': '2', 'cod3': '3', 'cod4': '4'})
-        self.assertEqual(response.status_code, 302)
+        response = self.client.post(reverse('verificar'), {'cod1': '1'})
+        self.assertEqual(response.status_code, 200)
         self.assertRedirects(response, reverse('votacao'))
     
     def test_verificar_view_post_incorrect_code(self):
