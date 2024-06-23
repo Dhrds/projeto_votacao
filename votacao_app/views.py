@@ -75,14 +75,13 @@ def check(request):
 
 def verificar(request):
     email = request.session.get('email', None)
-    if Aluno.objects.values_list('email').exists():
+    if email and Aluno.objects.values_list('email').exists():
         cod = Aluno.objects.get(email=email)
         cod1 = request.POST.get('cod1', 'None')
         cod2 = request.POST.get('cod2', 'None')
         cod3 = request.POST.get('cod3', 'None')
         cod4 = request.POST.get('cod4', 'None')
         cods = cod1 + cod2 + cod3 + cod4
-        print(cod.nome)
         if cod.codigo == cods:
             try:
                 user = User.objects.get(username=cod.nome)
@@ -90,7 +89,7 @@ def verificar(request):
                 login(request, user)
                 print(user.is_authenticated)
                 return redirect('votacao')
-            except:
+            except: # noqa
                 user = User.objects.create_user(
                     cod.nome, cod.email, cod.codigo)
                 login(request, user)
@@ -117,7 +116,7 @@ def votacao(request):
         print(voto, Votacao.objects.filter(aluno=user.username).exists())
         if voto:
             if not Votacao.objects.filter(aluno=user.username).exists():
-                votacao = Votacao.objects.create(
+                Votacao.objects.create(
                     aluno=user.username, grupo=voto)
                 voto = False
             else:

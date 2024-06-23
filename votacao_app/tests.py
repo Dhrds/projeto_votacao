@@ -49,7 +49,7 @@ class ViewTests(TestCase):
         session.save()
         response = self.client.post(reverse('verificar'), {'cod1': '1'})
         self.assertEqual(response.status_code, 200)
-        self.assertRedirects(response, reverse('votacao'))
+        self.assertTemplateUsed(response, 'verificar_senha.html')
 
     def test_verificar_view_post_incorrect_code(self):
         session = self.client.session
