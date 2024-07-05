@@ -11,10 +11,13 @@ class EmailThread(threading.Thread):
         self.reply_to = replyto
         threading.Thread.__init__(self)
 
-    def run (self):
-        msg = EmailMessage(self.subject, self.html_content, settings.EMAIL_HOST_USER, self.recipient_list, reply_to=self.reply_to)
+    def run(self):
+        msg = EmailMessage(self.subject,
+                           self.html_content, settings.EMAIL_HOST_USER,
+                           self.recipient_list, reply_to=self.reply_to)
         msg.content_subtype = "html"
         msg.send(fail_silently=False)
+
 
 def send_html_mail(subject, html_content, recipient_list, replyto):
     EmailThread(subject, html_content, recipient_list, replyto).start()

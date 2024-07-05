@@ -61,7 +61,7 @@ class ViewTests(TestCase):
         self.assertTemplateUsed(response, 'verificar_senha.html')
 
     def test_votacao_view_authenticated(self):
-        self.client.login(username='TestUser', password='1234')
+        self.client.login(username='TestUser', password='12345')
         response = self.client.get(reverse('votacao'))
         self.assertEqual(response.status_code, 200)
 

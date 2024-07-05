@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 
 class Grupo(models.Model):
@@ -21,6 +20,7 @@ class Aluno(models.Model):
 
 class Votacao(models.Model):
     grupo = models.CharField(max_length=30)
-    aluno = models.CharField(max_length=30,unique=True)
+    aluno = models.CharField(max_length=30, unique=True)
+
     def __str__(self):
         return self.grupo
