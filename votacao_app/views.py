@@ -101,7 +101,7 @@ def verificar(request):
         return reponse
 
 
-def votacao(request):
+def votacao(request): 
 
     user = request.user
     if user.is_authenticated:
